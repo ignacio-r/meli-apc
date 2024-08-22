@@ -3,3 +3,6 @@ spring:
         name: meli-apc-back
 server:
     port: 8080
+
+app:
+    base-url: http://localhost:${server.port}
