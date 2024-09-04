@@ -11,20 +11,25 @@ class MeliSearchService(
     private val restClient: RestClient,
 ) {
 
-    fun findByKeyword(keyword: String): MeliSearchResponse {
-        val response=  restClient
+    fun findByKeyword(keyword: String, filters: Map<String, String>?): MeliSearchResponse {
+
+        val queryString = (filters ?: emptyMap())
+            .minus("keyword")
+            .entries
+            .fold("/search?q=$keyword") { acc, entry ->
+                "$acc&${entry.key}=${entry.value}"
+            }
+
+        return restClient
             .get()
-            .uri("/search?q=$keyword")
+            .uri(queryString)
             .accept(MediaType.APPLICATION_JSON)
             .retrieve()
             .body(object : ParameterizedTypeReference<MeliSearchResponse>() {})
+            ?: MeliSearchResponse()
 
-        if (response != null) {
-            return response
-        }
-
-        return MeliSearchResponse()
     }
+
 
 
 }
