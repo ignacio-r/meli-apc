@@ -28,13 +28,12 @@ Antes de ejecutar el proyecto, asegúrate de configurar las siguientes variables
 
 
 ### Compilar y Ejecutar el JAR
-1. Asegurate de tener JDK 21 instalado.
-2. En el directorio raíz del proyecto, ejecuta el siguiente comando para compilar el proyecto y generar el archivo `.jar`:
+1. En el directorio raíz del proyecto, ejecuta el siguiente comando para compilar el proyecto y generar el archivo `.jar`:
 
    ```bash
    ./mvnw clean package
   
-3. Ejecuta el archivo .jar generado con el siguiente comando:
+2. Ejecuta el archivo .jar generado con el siguiente comando:
 
    ```bash
    java -jar target/backend-x.x.x.jar
