@@ -9,7 +9,9 @@ class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id : Long = 0
-    var email: String = ""
-    var password: String = ""
+    lateinit var email: String
+    lateinit var password: String
+    @ManyToMany(fetch = FetchType.EAGER)
+    lateinit var roles: Collection<Role>
 
 }
