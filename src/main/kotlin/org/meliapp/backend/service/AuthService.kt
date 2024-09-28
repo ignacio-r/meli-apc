@@ -28,7 +28,7 @@ class AuthService(
         user.password = passwordEncoder.encode(registerRequest.password)
 
         val role = roleRepository
-            .findRoleByName(RoleName.ROLE_ADMIN)
+            .findRoleByName(RoleName.ROLE_USER)
             .orElseThrow { RuntimeException("Role not found: ${RoleName.ROLE_USER.name}") }
 
         user.roles = setOf(role)

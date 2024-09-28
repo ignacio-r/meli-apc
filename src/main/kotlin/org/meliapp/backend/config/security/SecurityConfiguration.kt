@@ -5,6 +5,8 @@ import org.meliapp.backend.service.CustomUserDetailsService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -26,6 +28,14 @@ class SecurityConfiguration(
     @Bean
     fun passwordEncoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
+    }
+
+    @Bean
+    fun roleHierarchy(): RoleHierarchy {
+        return RoleHierarchyImpl
+            .withDefaultRolePrefix()
+            .role("ADMIN").implies("USER")
+            .build()
     }
 
     @Bean
